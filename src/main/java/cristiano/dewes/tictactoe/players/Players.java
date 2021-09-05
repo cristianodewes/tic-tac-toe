@@ -15,7 +15,7 @@ public abstract class Players {
 		this.symbol = symbol;
 	}
 
-	public boolean play() throws InvalidMoveException{
+	public boolean play() throws InvalidMoveException {
 		return false;
 	}
 

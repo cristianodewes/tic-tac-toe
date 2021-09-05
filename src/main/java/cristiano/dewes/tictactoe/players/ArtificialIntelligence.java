@@ -1,5 +1,6 @@
 package cristiano.dewes.tictactoe.players;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import cristiano.dewes.tictactoe.Constants;
@@ -9,7 +10,8 @@ public class ArtificialIntelligence extends Players {
 
 	private Players enemy = null;
 	private String nextMove = null;
-	private Random num = new Random();
+	private Random randomNum = new Random();
+	private ArrayList<String> movePotential = new ArrayList<String>();
 
 	public ArtificialIntelligence(String name, Board board, char symbol, Players opponent) {
 		super(name, board, symbol);
@@ -23,6 +25,7 @@ public class ArtificialIntelligence extends Players {
 	}
 
 	private Move inputMove() throws InvalidMoveException {
+		movePotential.clear();
 		if (checkAISituation()) {
 			return new Move(nextMove);
 		}
@@ -30,7 +33,15 @@ public class ArtificialIntelligence extends Players {
 		if (checkPlayerSituation()) {
 			return new Move(nextMove);
 		}
-		nextMove = num.nextInt(Constants.BOARD_SIZE-1) + "," + num.nextInt(Constants.BOARD_SIZE-1);
+		
+		for (int x = 0; x < Constants.BOARD_SIZE; x++) {
+			for (int y = 0; y < Constants.BOARD_SIZE; y++) {
+				if(this.getBoard().getMatrix()[x][y] == ' ') {
+					movePotential.add(x + "," + y);
+				}
+			}
+		}
+		nextMove = movePotential.get(randomNum.nextInt(movePotential.size()));
 		return new Move(nextMove);
 	}
 
@@ -76,7 +87,7 @@ public class ArtificialIntelligence extends Players {
 			}
 		}
 
-		if (numOfSymbol == Constants.BOARD_SIZE-1 && numOfSpace == 1) {
+		if (numOfSymbol == Constants.BOARD_SIZE - 1 && numOfSpace == 1) {
 			nextMove = position;
 			return true;
 		}
@@ -106,7 +117,7 @@ public class ArtificialIntelligence extends Players {
 			}
 		}
 
-		if (numOfSymbol == Constants.BOARD_SIZE-1 && numOfSpace == 1) {
+		if (numOfSymbol == Constants.BOARD_SIZE - 1 && numOfSpace == 1) {
 			nextMove = position;
 			return true;
 		}
@@ -127,7 +138,7 @@ public class ArtificialIntelligence extends Players {
 			}
 		}
 
-		if (numOfSymbol == Constants.BOARD_SIZE-1 && numOfSpace == 1) {
+		if (numOfSymbol == Constants.BOARD_SIZE - 1 && numOfSpace == 1) {
 			nextMove = position;
 			return true;
 		}
@@ -147,7 +158,7 @@ public class ArtificialIntelligence extends Players {
 				numOfSpace++;
 			}
 		}
-		if (numOfSymbol == Constants.BOARD_SIZE-1 && numOfSpace == 1) {
+		if (numOfSymbol == Constants.BOARD_SIZE - 1 && numOfSpace == 1) {
 			nextMove = position;
 			return true;
 		}

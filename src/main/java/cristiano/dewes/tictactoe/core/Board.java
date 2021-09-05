@@ -6,14 +6,12 @@ import cristiano.dewes.tictactoe.ui.Ui;
 
 public class Board {
 
-	
-
 	private char[][] matrix = new char[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
 
 	public Board() {
 		clear();
 	}
-	
+
 	public char[][] getMatrix() {
 		return matrix;
 	}
@@ -29,10 +27,12 @@ public class Board {
 	}
 
 	public void print() {
-
+		char letter = 97;
+		Ui.printText("    JOGO                 OPCOES");
 		for (int x = 0; x < Constants.BOARD_SIZE; x++) {
 			Ui.printTextWithNoNewLine(" ");
 			for (int y = 0; y < Constants.BOARD_SIZE; y++) {
+
 				Ui.printTextWithNoNewLine(String.valueOf(matrix[x][y]));
 
 				if (y < Constants.BOARD_SIZE - 1) {
@@ -40,7 +40,36 @@ public class Board {
 				}
 			}
 
+			Ui.printTextWithNoNewLine("             ");
+
+			for (int y = 0; y < Constants.BOARD_SIZE; y++) {
+				if (matrix[x][y] == ' ') {
+					Ui.printTextWithNoNewLine(String.valueOf(letter));
+				} else {
+					Ui.printTextWithNoNewLine(" ");
+				}
+				if (y < Constants.BOARD_SIZE - 1) {
+					Ui.printTextWithNoNewLine(" | ");
+				}
+				letter++;
+			}
+
 			Ui.printNewLine();
+
+			if (x < Constants.BOARD_SIZE - 1) {
+				for (int a = 0; a < Constants.BOARD_SIZE; a++) {
+
+					if (a == Constants.BOARD_SIZE - 1) {
+						Ui.printTextWithNoNewLine("---");
+						break;
+					}
+
+					Ui.printTextWithNoNewLine("----");
+
+				}
+			}
+
+			Ui.printTextWithNoNewLine("           ");
 
 			if (x < Constants.BOARD_SIZE - 1) {
 				for (int a = 0; a < Constants.BOARD_SIZE; a++) {
@@ -72,15 +101,15 @@ public class Board {
 		return true;
 	}
 
-	public boolean play(Players player, Move move) throws InvalidMoveException{
+	public boolean play(Players player, Move move) throws InvalidMoveException {
 		int x = move.getX();
 		int y = move.getY();
-		
-		if(x<0 || y<0 || x >= Constants.BOARD_SIZE || y >= Constants.BOARD_SIZE) {
+
+		if (x < 0 || y < 0 || x >= Constants.BOARD_SIZE || y >= Constants.BOARD_SIZE) {
 			throw new InvalidMoveException("O intervalo da jogada é inválido");
 		}
-		
-		if(matrix[x][y] != ' ') {
+
+		if (matrix[x][y] != ' ') {
 			throw new InvalidMoveException("Essa jogada já foi realizada");
 		}
 

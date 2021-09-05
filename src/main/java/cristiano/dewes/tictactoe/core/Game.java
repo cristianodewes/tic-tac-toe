@@ -85,11 +85,15 @@ public class Game {
 			Ui.printNewLine();
 			Ui.printNewLine();
 			Ui.printNewLine();
-			Ui.printText("PARABÉNS '" + winner.getName() + "'!!!!!\nVOCÊ VENCEU O JOGO!!!");
 
 			if (winner.getClass() == Player.class) {
+				Ui.printText("PARABÉNS '" + winner.getName() + "'!!!!!\nVOCÊ VENCEU O JOGO!!!");
 				scoreManager.saveScore((Player) winner);
+
+			} else if (winner.getClass() == ArtificialIntelligence.class) {
+				Ui.printText("INFELIZMENTE VOCÊ PERDEU O JOGO");
 			}
+
 		}
 
 		board.print();
@@ -125,7 +129,7 @@ public class Game {
 		return players[currentPlayerIndex];
 	}
 
-	private ScoreManager createCoreManager() throws IOException{
+	private ScoreManager createCoreManager() throws IOException {
 		return new FileScoreManager();
 	}
 

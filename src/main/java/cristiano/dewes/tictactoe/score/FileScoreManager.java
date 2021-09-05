@@ -45,17 +45,17 @@ public class FileScoreManager implements ScoreManager {
 	@Override
 	public void saveScore(Player player) throws IOException {
 		Integer score = getScore(player);
-		
-		if(score == null) {
+
+		if (score == null) {
 			score = 0;
 		}
-		
+
 		scoreMap.put(player.getName().toUpperCase(), score + 1);
-		
-		try(BufferedWriter writer = Files.newBufferedWriter(SCORE_FILE)) {
+
+		try (BufferedWriter writer = Files.newBufferedWriter(SCORE_FILE)) {
 			Set<Map.Entry<String, Integer>> entries = scoreMap.entrySet();
-			
-			for(Map.Entry<String, Integer> entry : entries) {
+
+			for (Map.Entry<String, Integer> entry : entries) {
 				String name = entry.getKey().toUpperCase();
 				Integer s = entry.getValue();
 				writer.write(name + "|" + s);

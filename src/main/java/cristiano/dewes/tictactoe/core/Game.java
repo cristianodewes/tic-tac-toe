@@ -56,7 +56,9 @@ public class Game {
 		Players winner = null;
 
 		while (!gameEnded) {
-			board.print();
+			if(currentPlayer.getClass() == Player.class) {
+				board.print();
+			}
 
 			boolean sequenceFound;
 			try {

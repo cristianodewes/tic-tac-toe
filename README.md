@@ -5,7 +5,7 @@ The Tic Tac Toe Java project is a game to be played in the terminal. There are t
 ## Usage
 
 ```bash
-Run the Main.class on the terminal to play te game.
+Run the tic-tac-toe.jar on the terminal to play te game.
 ```
 
 ## Contributing
